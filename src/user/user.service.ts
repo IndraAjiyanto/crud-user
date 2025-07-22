@@ -17,18 +17,34 @@ export class UserService {
     return await this.usersRepository.save(user);
   }
 
+  async findByEmail(email:string){
+    return await this.usersRepository.findOne({
+      where: {
+        email,
+      }
+    })
+  }
+
+    async findByid(id:number){
+    return await this.usersRepository.findOne({
+      where: {
+        id,
+      }
+    })
+  }
+
   async findAll() {
     return await this.usersRepository.find();
   }
 
-  async findOne(id: number) {
+  async findOne(username: string) {
     return await this.usersRepository.findOne({
-      where : {id}
+      where : {username}
     });
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    const user = await this.findOne(id);
+    const user = await this.findByid(id);
     if(!user){
       throw new NotFoundException();
     }
@@ -37,7 +53,7 @@ export class UserService {
   }
 
   async remove(id: number) {
-    const user = await this.findOne(id);
+    const user = await this.findByid(id);
     if(!user){
       throw new NotFoundException();
     }
