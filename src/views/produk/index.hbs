@@ -1,0 +1,33 @@
+<h1>Daftar Produk</h1>
+
+<p>
+  <a href="produk/create">+ Tambah Produk</a>
+</p>
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Nama</th>
+      <th>Deskripsi</th>
+      <th>Stok</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each produk}}
+      <tr>
+        <td>{{@index}}</td>
+        <td>{{this.nama}}</td>
+        <td>{{this.deskripsi}}</td>
+        <td>{{this.stok}}</td>
+        <td>
+          <a href="/produk/edit/{{this.id}}">Edit</a> |
+          <form action="/produk/delete/{{this.id}}" method="POST" style="display:inline;">
+            <button type="submit" onclick="return confirm('Yakin ingin menghapus produk ini?')">Delete</button>
+          </form>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
